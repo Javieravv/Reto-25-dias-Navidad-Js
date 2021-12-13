@@ -1,0 +1,27 @@
+{
+  "name": "retos-25-dias-navidad",
+  "version": "1.0.0",
+  "description": "Retos de ejercicios de JavaScript, durante 25 días",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Javieravv/Reto-25-dias-Navidad-Js.git"
+  },
+  "keywords": [
+    "javascript",
+    "navidad",
+    "retos",
+    "challenges",
+    "map",
+    "array"
+  ],
+  "author": "Javier Vargas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Javieravv/Reto-25-dias-Navidad-Js/issues"
+  },
+  "homepage": "https://github.com/Javieravv/Reto-25-dias-Navidad-Js#readme"
+}
