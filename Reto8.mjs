@@ -21,7 +21,31 @@
 // maxProfit(pricesAda) = // -> -1 (no hay ganancia posible)
 
 
+const pricesBtc1 = [39, 18, 29, 25, 34, 32, 5]
+const pricesEth2 = [10, 20, 30, 40, 50, 60, 70]  
+const pricesDoge = [18, 15, 12, 11, 9, 7]
+const pricesAda = [3, 3, 3, 3, 3]
+
+
 const  maxProfit = (prices) => {
+  console.log (prices)
     // ¡Y no olvides compartir tu solución en redes!
-    return false
-  }
+    let compra = prices[0], venta = prices[1], ganancia = -1
+    for (let x = 0; x < prices.length-1; x++) {
+      for (let y=x; y < prices.length; y++) {
+        if (prices[x] < prices [y]) {
+          prices[x] < compra ? compra = prices[x] : null
+          prices[y] > venta ? venta = prices[y] : null
+          // console.log (compra, ' , ', venta)
+          ganancia = venta - compra
+        }
+      }
+    }
+    // console.log('COMPRA = ', compra, 'VENTA = ', venta)
+    return ganancia
+}
+
+// console.log (maxProfit(pricesBtc1))
+// console.log (maxProfit(pricesEth2))
+// console.log (maxProfit(pricesDoge))
+console.log (maxProfit(pricesAda))
