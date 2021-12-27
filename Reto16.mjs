@@ -27,34 +27,51 @@
 // decodeNumbers(';!') // 50
 // decodeNumbers(';.W') // NaN
 
+// const decodeNumbers = (symbols) => {
+//     // ¡No olvides compartir tu solución en redes!
+//     const objSymbols = [
+//         {symbol: '.', valor : 1},
+//         {symbol: ',', valor: 5},
+//         {symbol: ':', valor: 10},
+//         {symbol: ';', valor : 50},
+//         {symbol: '!', valor : 100}
+//     ]
+//     let result = 0
+//     let obj1, obj2
+//     for (let x = 1; x < symbols.length; x++) {
+//         obj1 = objSymbols.find(symbol => symbol.symbol === symbols[x-1])
+//         obj2 = objSymbols.find(symbol => symbol.symbol === symbols[x])
+//         if (obj1 && obj2) {
+//             if (obj1.valor < obj2.valor) {
+//                 obj1.valor = obj1.valor * -1
+//             } 
+//             result = result + obj1.valor
+//             if (x === symbols.length -1) {
+//                 result = result + obj2.valor
+//             }
+//         } else {
+//             result = NaN
+//             break
+//         }
+//      }
+//     return result
+// }
+
 const decodeNumbers = (symbols) => {
-    // ¡No olvides compartir tu solución en redes!
-    const objSymbols = [
-        {symbol: '.', valor : 1},
-        {symbol: ',', valor: 5},
-        {symbol: ':', valor: 10},
-        {symbol: ';', valor : 50},
-        {symbol: '!', valor : 100}
-    ]
-    let result = 0
-    let obj1, obj2
-    for (let x = 1; x < symbols.length; x++) {
-        obj1 = objSymbols.find(symbol => symbol.symbol === symbols[x-1])
-        obj2 = objSymbols.find(symbol => symbol.symbol === symbols[x])
-        if (obj1 && obj2) {
-            if (obj1.valor < obj2.valor) {
-                obj1.valor = obj1.valor * -1
-            } 
-            result = result + obj1.valor
-            if (x === symbols.length -1) {
-                result = result + obj2.valor
-            }
-        } else {
-            result = NaN
-            break
-        }
-     }
-    return result
+    const values = {
+        '.': 1,
+        ',': 5,
+        ':': 10,
+        ';': 50,
+        '!': 100
+    }
+
+    symbols = symbols.split('').reverse()
+    return symbols.reduce((acc, symbol, i) => 
+    {
+        if (isNaN(acc) || !values[symbol]) return NaN
+        return values[symbols[i-1]] > values[symbol] ? acc - values[symbol] : acc + values[symbol]
+    },0)
 }
 
 console.log(decodeNumbers('...')) // 3
