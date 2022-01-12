@@ -35,23 +35,28 @@
 // ¡Ten cuidado! Como has visto en el segundo ejemplo, el organigrama puede tener diferentes niveles y además nos viene información que puede ser que no necesitemos. Debemos tener en cuenta el parámetro de carrierID para calcular bien el número y contar todo su equipo.
 
 const countPackages = (carriers, carrierID) => {
+  let valAux
   carriers.forEach(carrier => {
     if (carrier.includes(carrierID)) {
+      valAux = carrier[1]
       if (carrier[2].length > 0) {
-        
+        carrier[2].forEach (carrierArr => {
+          valAux = valAux + countPackages (carriers, carrierArr)
+        })
       }
+      return valAux
     }
   })
-  return -22
+  return valAux
 }
 
-// const carriers = [
-//   ['dapelu', 5, ['midu', 'jelowing']],
-//   ['midu', 2, []],
-//   ['jelowing', 2, []]
-// ]
+const carriers = [
+  ['dapelu', 5, ['midu', 'jelowing']],
+  ['midu', 2, []],
+  ['jelowing', 2, []]
+]
 
-// console.log (countPackages(carriers, 'dapelu')) // 9
+console.log (countPackages(carriers, 'dapelu')) // 9
 // // 5 de dapelu, 2 de midu y 2 de jelowing = 9
 
 const carriers2 = [
