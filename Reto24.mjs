@@ -23,32 +23,28 @@
 
 // El cuñado 🦹‍♂️, que se las sabe todas, me ha dicho que tenga cuidado porque el truco del JSON.stringify puede no funcionar... ya que los árboles pueden ser el mismo pero el orden de representación de las ramas izquierda y derecha puede ser inversa...
 
-const checkIsSameTree = (treeA, treeB) => {
-    let sameTrees = true
-    const array1 = JSON.stringify(treeA)
-    const array2 = JSON.stringify(treeB)
+// Esta solución no es mía. La tomé de otro lado.
+// Fuente: https://platzi.com/tutoriales/1339-fundamentos-javascript/7308-comparacion-de-objetos-en-js/?utm_source=google&utm_medium=cpc&utm_campaign=12915366154&utm_adgroup=&utm_content=&gclid=Cj0KCQiAraSPBhDuARIsAM3Js4rNwBpvjE4SZs7pgZq1516LKVRKIWmSmDeVFG8S8Y7Y46mG7cijNa8aAokWEALw_wcB&gclsrc=aw.ds
 
-    console.log (array1)
-    console.log(array1.split(','))
-    console.log (array2)
-    console.log(array2.split(','))
-    // let  array3 = [], array4 = []
-    // for (let i in array1) 
-    //     array3.push (array1[i])
-    // for (let i in array2) 
-    //     array4.push (array2[i])
-    
-    // if (array3.length !== array4.length) {
-    //     sameTrees = false
-    // } else {
-    //     for (let x = 0; x < array3.length; x++) {
-    //         if (array3[x] !== array4[x]) {
-    //             sameTrees = false
-    //             break
-    //         }
-    //     }
-    // }
-    // return sameTrees
+const checkIsSameTree = (treeA, treeB) => {
+    let keysObjet1 = Object.keys(treeA);
+    let keysObjet2 = Object.keys(treeB);
+
+    if (keysObjet1.length !== keysObjet2.length) return false
+
+    for ( let key of keysObjet1) {
+      let value1 = treeA[key]
+      let value2 = treeB[key]
+      let areObj1 = Object.prototype.toString.call(value1) === '[object Object]'
+      let areObj2 = Object.prototype.toString.call(value2) === '[object Object]'
+      let areObjects = areObj1 && areObj2
+
+      if (
+          ( areObjects && !checkIsSameTree (value1, value2)) ||
+          ( !areObjects && value1 !== value2)
+      ) return false
+    }
+    return true
 }
 
 const tree = {
@@ -62,4 +58,6 @@ const tree2 = {
   right: { value: 5, left: null, right: { value: 4, left: null, right: null } }
 }
 
-console.log (checkIsSameTree(tree, tree2)) // true
+console.log (checkIsSameTree(tree, tree)) // true
+console.log (checkIsSameTree(tree, tree2)) // false
+console.log (checkIsSameTree(tree2, tree2)) // true
